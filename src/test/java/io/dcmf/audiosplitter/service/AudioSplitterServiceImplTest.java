@@ -19,8 +19,9 @@ class AudioSplitterServiceImplTest extends AbstractSystemConsoleTest {
 
     @Test
     void splitWordsSuccess() {
-        String wordList = Path.of(WORKDIR, TEST_WORDFILE_WITH_20_VALID_WORDS).toString();
-        service.split(wordList, "/false");
+        String wordList = Path.of(WORKDIR, TEST_WORDLIST_01).toString();
+        String audioFile = Path.of(WORKDIR, TEST_AUDIO_FILE_02).toString();
+        service.split(wordList, audioFile);
         assertTrue(errorStream.toString().isBlank());
         assertTrue(outputStream.toString().isBlank());
     }

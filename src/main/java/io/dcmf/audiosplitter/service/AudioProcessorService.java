@@ -4,5 +4,5 @@ import java.io.File;
 import java.util.List;
 
 public interface AudioProcessorService {
-    List<String> process(List<String> words, File file);
+    void process(List<String> words, File file);
 }

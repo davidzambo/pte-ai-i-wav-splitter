@@ -17,8 +17,8 @@ class AudioSplitterTest extends AbstractSystemConsoleTest {
 
     @Test
     void with20WordsList() {
-        String wordList = Path.of(WORKDIR, TEST_WORDFILE_WITH_20_VALID_WORDS).toString();
-        String audio = Path.of(WORKDIR, TEST_AUDIO_FILE_01).toString();
+        String wordList = Path.of(WORKDIR, TEST_WORDLIST_01).toString();
+        String audio = Path.of(WORKDIR, TEST_AUDIO_FILE_02).toString();
         AudioSplitter.main(new String[]{"-t", wordList, "-a", audio});
         assertEquals("", errorStream.toString());
         assertEquals("", outputStream.toString());

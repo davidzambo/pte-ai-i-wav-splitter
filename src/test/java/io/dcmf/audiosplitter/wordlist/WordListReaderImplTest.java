@@ -20,7 +20,7 @@ class WordListReaderImplTest {
     @Test
     void readValidTestFile() {
         try {
-            final List<String> words = reader.readWords(new File(WORKDIR, TEST_WORDFILE_WITH_20_VALID_WORDS));
+            final List<String> words = reader.readWords(new File(WORKDIR, TEST_WORDLIST_01));
             assertEquals(20, words.size());
         } catch (IOException e) {
             assertNull(e);
