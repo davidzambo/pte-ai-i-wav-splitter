@@ -15,13 +15,14 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class AudioProcessorServiceImpl implements AudioProcessorService {
-    private static final boolean DEVELOPMENT = false;
+    private static final boolean DEVELOPMENT = true;
     public static final String OUTPUT_DIRECTORY = "chunks";
     protected final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     @Override
-    public void process(List<String> words, File file) {
+    public int process(List<String> words, File file) {
         int countOfWords = words.size();
+        int fileNameCounter = 0;
 
         try (FileOutputStream fileOutputStream = new FileOutputStream("data.dat")) {
             WavFile wavFile = WavFile.openWavFile(file);
@@ -33,7 +34,6 @@ public class AudioProcessorServiceImpl implements AudioProcessorService {
             int framesRead;
 
             final int scale = 65536;
-            int fileNameCounter = 0;
             String word = words.get(0);
             ensureOutputDirectoryExists();
             WavFile wavChunk = getNewWavFile(wavFile, ++fileNameCounter, word);
@@ -74,7 +74,7 @@ public class AudioProcessorServiceImpl implements AudioProcessorService {
 
                 if (shouldDump) {
                     wavChunk.close();
-                    wavChunk = getNewWavFile(wavFile, ++fileNameCounter, words.get(fileNameCounter - 1));
+                    wavChunk = getNewWavFile(wavFile, ++fileNameCounter, getChunkName(words, fileNameCounter - 1));
                     shouldDump = false;
                     inWord = false;
                 }
@@ -83,6 +83,11 @@ public class AudioProcessorServiceImpl implements AudioProcessorService {
         } catch (IOException | WavFileException e) {
             logger.warning(e.getMessage());
         }
+        return fileNameCounter - 1;
+    }
+
+    private String getChunkName(List<String> words, int i) {
+        return i < words.size() ? words.get(i) : "";
     }
 
     private void ensureOutputDirectoryExists() throws FileNotFoundException {

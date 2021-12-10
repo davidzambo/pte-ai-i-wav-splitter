@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ArgsInterpreterTest {
+class ArgsInterpreterTest {
     public static final String AUDIO_FILENAME = "audiotest.wav";
     public static final String WORDLIST_FILENAME = "wordlist.csv";
 
-    String[] AUDIO_FIRST = new String[]{"-a", AUDIO_FILENAME, "-d", WORDLIST_FILENAME};
-    String[] VIDEO_FIRST = new String[]{"-d", WORDLIST_FILENAME, "-a", AUDIO_FILENAME};
+    String[] AUDIO_FIRST = new String[]{"-a", AUDIO_FILENAME, "-t", WORDLIST_FILENAME};
+    String[] VIDEO_FIRST = new String[]{"-t", WORDLIST_FILENAME, "-a", AUDIO_FILENAME};
     String[] DUPLICATED_AUDIO = new String[]{"-a", AUDIO_FILENAME, "-a", WORDLIST_FILENAME};
     String[] MISSING_ARGUMENTS = new String[]{"-a", AUDIO_FILENAME};
-    String[] TOO_MUCH_ARGUMENTS = new String[]{"-a", AUDIO_FILENAME, "-d", WORDLIST_FILENAME, "-e", "exception"};
+    String[] TOO_MUCH_ARGUMENTS = new String[]{"-a", AUDIO_FILENAME, "-t", WORDLIST_FILENAME, "-e", "exception"};
 
     @Test
     void audioFileFirst() {

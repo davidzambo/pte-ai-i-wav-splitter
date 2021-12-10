@@ -11,14 +11,14 @@ public class ArgsInterpreter {
             throw new IllegalArgumentException();
         }
 
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("-a") && (i + 1 < args.length) && Objects.isNull(audioSource)) {
-                audioSource = args[i++ + 1];
+        for (int i = 0; i < args.length; i += 2) {
+            if (args[i].equals("-a") && Objects.isNull(audioSource)) {
+                audioSource = args[i + 1];
                 continue;
             }
 
-            if (args[i].equals("-d") && (i + 1 < args.length) && Objects.isNull(wordListSource)) {
-                wordListSource = args[i++ + 1];
+            if (args[i].equals("-t") && Objects.isNull(wordListSource)) {
+                wordListSource = args[i + 1];
             }
         }
 
